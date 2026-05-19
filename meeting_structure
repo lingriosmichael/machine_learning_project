@@ -1,308 +1,248 @@
-# 🧭 Overall Sprint Rhythm
+# 🧭 Updated Sprint Rhythm (Lean Version)
 
-You have:
+## Daily Structure
 
-* **Day 0 (Today afternoon)** → kickoff + setup
-* **Day 1 (Tomorrow full day)** → foundation + baseline
-* **Day 2 (Thursday full day)** → feature + model lift
-* **Day 3 (Friday full day)** → tuning + ensemble
-* **Weekend off**
-* **Day 4 (Tuesday)** → presentations
+### ☀️ Morning Sync (15–20 min)
 
----
+**Purpose:** alignment + unblock + priorities
 
-# 📅 DAILY MEETING STRUCTURE
+### Agenda
+- What was completed?
+- Current best score / insight?
+- What is today’s highest-impact task?
+- Any blockers?
 
----
-
-# 🟦 DAY 0 — TODAY (Kickoff Afternoon, 60–90 min)
-
-## 🎯 Goal: Align, split work, start execution immediately
-
-### 🧩 1. Project framing (10 min)
-
-* What is the target metric (MSLE)?
-* What does “good performance” mean (baseline vs strong model)?
-* What is the MVP for tomorrow?
+### Output
+- clear ownership
+- metric update
+- execution focus for the day
 
 ---
 
-### 🧩 2. Data reality check (15 min)
+### 🌙 End-of-Day Sync @ 4 PM (20–45 min)
 
-Each person quickly scans dataset:
+**Purpose:** decisions + consolidation + freeze direction
 
-* A → sparsity + structure
-* B → modeling feasibility
-* C → evaluation risks + CV strategy intuition
+### Agenda
+- What changed today?
+- What improved CV?
+- What failed and should be killed?
+- What’s tomorrow’s highest-impact action?
+- Updated leaderboard / validation score
 
----
-
-### 🧩 3. Final task split confirmation (15 min)
-
-Confirm:
-
-* A = data + features
-* B = modeling + tuning
-* C = evaluation + communication
-
-(no ambiguity, no overlap confusion)
+### Output
+- decisions made
+- next-day priorities locked
+- no ambiguity overnight
 
 ---
 
-### 🧩 4. Repo + workflow setup (20 min)
+# 📅 REVISED SPRINT FLOW
 
-* GitHub repo created
-* Branch strategy confirmed
-* Kanban board live
-* Folder structure agreed
+# 🟦 DAY 0 — Kickoff Afternoon
 
----
+## Kickoff Meeting
 
-### 🧩 5. First execution sprint (30 min)
-
-Each person starts immediately:
-
-* A → EDA notebook
-* B → CV + baseline skeleton
-* C → evaluation framework + metric understanding
+### Topics
+- project framing
+- metric understanding (MSLE)
+- task split
+- repo setup
+- branch strategy
+- CV discussion
+- first sprint launch
 
 ---
 
-### 📌 Output of Day 0
+## After Meeting
 
-* repo running
-* first notebooks started
-* CV framework skeleton exists
-* no blockers
-
----
-
-# 📅 DAY 1 — FULL DAY (Foundation Day)
-
-## 🧭 Meeting structure: 3 touchpoints only
+### Immediate Execution
+- A → EDA + sparsity analysis
+- B → baseline pipeline
+- C → evaluation framework + presentation skeleton
 
 ---
 
-## ☀️ Morning Sync (15 min)
+## 🌙 End-of-Day @ 4 PM
 
-### Agenda:
-
-* What did you finish last night?
-* What are you building today?
-* Any blockers?
-
-### Output goal:
-
-* CV pipeline working
-* baseline models running
-* EDA insights forming
+### Quick Review
+- repo working?
+- baseline running?
+- blockers?
+- tomorrow priorities?
 
 ---
 
-## ⚡ Midday Sync (20 min)
+# 📅 DAY 1 — Foundation Day
 
-### Focus:
+## ☀️ Morning Sync
 
-* Are baseline scores reasonable?
-* Are features meaningful or noise?
-* Is CV stable?
+### Focus
+- baseline status
+- CV stability
+- initial EDA insights
 
-### Decisions:
-
-* keep or drop feature ideas
-* adjust CV strategy if needed
-
----
-
-## 🌙 End-of-Day Review (30 min)
-
-### Agenda:
-
-* Best baseline model so far?
-* Biggest insight from data?
-* What should we double down on tomorrow?
-
-### Output:
-
-* baseline score locked
-* first feature engineering ideas prioritized
-* ensemble direction decided
+### Execution Block
+- feature engineering v1
+- baseline models
+- CV debugging
 
 ---
 
-# 📅 DAY 2 — FEATURE + MODEL LIFT
+## 🌙 4 PM Review
 
-## ☀️ Morning Sync (15 min)
+### Decide
+- strongest baseline
+- promising features
+- bad ideas to drop
+- ensemble direction
 
-* Feature engineering progress (A)
-* Model improvements (B)
-* Evaluation feedback (C)
-
----
-
-## ⚡ Midday Model Check (30 min)
-
-This is the **most important meeting of sprint**
-
-### Agenda:
-
-* Which features actually improved CV?
-* Which models are stable?
-* Any sign of overfitting?
-
-### Decisions:
-
-* finalize feature set v1
-* choose top 2 models for tuning
+### Output
+- baseline locked
+- feature priorities defined
 
 ---
 
-## 🌙 End-of-Day Sync (20 min)
+# 📅 DAY 2 — Model Lift Day
 
-* First ensemble results?
-* CV gain vs baseline?
-* What to kill / keep for tomorrow?
+## ☀️ Morning Sync
 
----
+### Focus
+- feature impact
+- model gains
+- overfitting signals
 
-# 📅 DAY 3 — OPTIMIZATION + ENSEMBLE DAY
-
-## ☀️ Morning Sync (15 min)
-
-* tuning progress
-* feature refinement
-* ensemble status
+### Execution
+- tuning
+- advanced features
+- model comparisons
 
 ---
 
-## ⚡ Midday Decision Meeting (30 min)
+## 🌙 4 PM Review
 
-### Critical decisions:
+### Decide
+- top 2 models
+- final feature candidates
+- first ensemble direction
 
-* best model config
-* final ensemble weights direction
-* whether to simplify or increase complexity
-
----
-
-## 🌙 End-of-Day Freeze Meeting (45 min)
-
-### This is a HARD FREEZE checkpoint
-
-You decide:
-
-* FINAL model architecture
-* FINAL feature set
-* FINAL submission strategy
-
-### Output:
-
-* submission_v2 locked
-* final CV score documented
-* no more experimentation after this point
+### Output
+- shortlist finalized
+- weak experiments removed
 
 ---
 
-# 📅 WEEKEND — NO WORK
+# 📅 DAY 3 — Optimization + Freeze
 
-(no meetings, no changes)
+## ☀️ Morning Sync
 
----
+### Focus
+- tuning status
+- ensemble performance
+- reproducibility
 
-# 📅 MONDAY — OPTIONAL (30–45 min async sync or none)
-
-### Goal:
-
-* make sure everything is reproducible
-* ensure presentation is ready
-
-### Check:
-
-* repo runs from scratch
-* plots exist
-* slides drafted
+### Execution
+- final optimization
+- blending/stacking
+- cleanup
 
 ---
 
-# 📅 TUESDAY — PRESENTATION DAY
+## 🌙 4 PM HARD FREEZE
+
+### Final Decisions
+- final feature set
+- final ensemble weights
+- final submission strategy
+- final presentation narrative
+
+### Output
+- frozen pipeline
+- reproducible repo
+- final CV documented
+
+> No more experimentation after this point.
 
 ---
 
-# 🟦 MORNING (60–90 min) — FINAL PREP
+# 📅 MONDAY — Optional Async Only
 
-## 🎯 Goal: lock narrative + visuals
-
-### Agenda:
-
-#### 1. Rehearse story (20 min)
-
-* problem → data → approach → results
-
-#### 2. Slide polishing (30 min)
-
-* remove technical clutter
-* simplify explanations
-
-#### 3. Final run-through (20–40 min)
-
-* each person presents their section
+## Checklist
+- reproducibility
+- plots
+- slides
+- README
+- speaking order
 
 ---
 
-# 🟦 AFTERNOON — FINAL PRESENTATION
+# 📅 TUESDAY — Presentation Day
 
-## Suggested structure:
+## ☀️ Morning Prep
 
-### A (Data)
-
-* sparsity + feature intuition
-* why feature engineering matters
-
-### B (Modeling)
-
-* baseline → improvements → ensemble
-* CV strategy explanation
-
-### C (Insights)
-
-* evaluation
-* interpretation
-* key takeaways
+### Focus
+- rehearsal
+- simplify technical explanations
+- final narrative polish
 
 ---
 
-# ⚙️ RULES FOR ALL DAYS (IMPORTANT)
+## 🟦 Presentation Structure
 
-### 1. No long meetings
+### A — Data
+- sparsity
+- preprocessing
+- feature engineering intuition
 
-Max 3 per day, all ≤30 min except freezes
+### B — Modeling
+- baseline
+- tuning
+- ensemble strategy
+- CV methodology
 
----
-
-### 2. Always end with:
-
-* “What changed today?”
-* “What do we kill tomorrow?”
-* “What is the next highest impact action?”
-
----
-
-### 3. Default mode is execution, not discussion
-
----
-
-### 4. Every meeting produces:
-
-* a decision
-* a next task list
-* a metric update (CV / LB score)
+### C — Evaluation & Insights
+- validation
+- interpretation
+- lessons learned
+- business impact
 
 ---
 
-# 🧠 Why this structure works
+# ⚙️ Team Rules
 
-* prevents over-meeting
-* forces rapid ML iteration
-* ensures feature/model feedback loops daily
-* builds toward a clean “freeze model”
-* reserves energy for presentation
+## 1. Long execution blocks > meetings
+
+The schedule maximizes uninterrupted modeling time.
+
+---
+
+## 2. Every day ends with 3 questions
+
+1. What improved?
+2. What do we kill?
+3. What is tomorrow’s highest-impact task?
+
+---
+
+## 3. Every sync must include
+- current best CV
+- current best model
+- biggest blocker/risk
+
+---
+
+## 4. Kill weak ideas early
+
+Fast iteration beats over-engineering.
+
+---
+
+# ✅ Why This Structure Works
+
+- fewer interruptions
+- more deep-work time
+- cleaner accountability
+- faster experimentation cycles
+- lower coordination overhead
+
+For a short ML sprint, this is usually the optimal cadence.
