@@ -1,70 +1,49 @@
-# Avito Demand Prediction
+# 📊 Project Adaptation: Santander Value Prediction
 
 ## Project Overview
 
-This project focuses on predicting the probability that an advertisement posted on Avito, a Russian online classifieds platform, will generate demand or engagement.
+This project focuses on predicting **customer value (continuous target)** from anonymized, high-dimensional, sparse tabular data provided by Santander.
 
-The goal is to build a machine learning pipeline that:
+Unlike typical business datasets, this problem requires:
 
-- Processes structured and text-based advertisement data
-- Engineers predictive features
-- Trains multiple machine learning models
-- Evaluates business impact
-- Provides explainability and insights
-- Demonstrates an end-to-end analytics workflow
+* Strong statistical modeling (not semantic understanding)
+* Robust handling of sparsity (~500+ anonymous features)
+* Careful validation design (KFold CV)
+* Feature engineering based on distribution patterns, not meaning
+* Ensemble modeling for performance gains
 
-This repository is structured to simulate a real-world collaborative machine learning project using:
+The goal is to build a reproducible ML pipeline that:
 
-- Jupyter notebooks
-- Modular Python code
-- GitHub collaboration workflows
-- Kanban task management
-- Reusable ML pipelines
-
----
-
-# Business Problem
-
-Online marketplaces like Avito need to determine:
-
-- Which advertisements are likely to succeed
-- Which listings require optimization
-- How sellers can improve conversion
-- How ranking and recommendation systems can be improved
-
-This project predicts advertisement demand using:
-
-- Ad metadata
-- Pricing information
-- Textual descriptions
-- Temporal features
-- User-related information
+* Explores and cleans high-dimensional sparse data
+* Engineers statistical features (row-wise + feature-wise)
+* Trains multiple regression models
+* Optimizes MSLE (log-based metric)
+* Produces a strong Kaggle submission
+* Communicates results to non-technical stakeholders
 
 ---
 
-# Machine Learning Objective
+# 🧠 Machine Learning Objective
 
 ## Problem Type
 
-Binary Classification
+Regression (Supervised Learning)
 
 ## Target Variable
 
-Ad demand / conversion indicator
+Continuous customer value
 
-## Primary Evaluation Metrics
+## Evaluation Metric
 
-- ROC-AUC
-- F1 Score
-- Precision
-- Recall
+* Mean Squared Logarithmic Error (MSLE)
+* Kaggle leaderboard ranking
 
 ---
 
-# Repository Structure
+# 🏗 Repository Structure (Adjusted)
 
 ```bash
-avito-demand-prediction/
+santander-value-prediction/
 │
 ├── data/
 │   ├── raw/
@@ -79,26 +58,20 @@ avito-demand-prediction/
 │   ├── 05_baseline_models.ipynb
 │   ├── 06_advanced_models.ipynb
 │   ├── 07_model_evaluation.ipynb
-│   ├── 08_explainability.ipynb
-│   ├── 09_business_insights.ipynb
-│   └── 10_final_pipeline_demo.ipynb
+│   ├── 08_model_ensembling.ipynb
+│   └── 09_final_pipeline_demo.ipynb
 │
 ├── src/
-│   ├── __init__.py
 │   ├── preprocessing.py
 │   ├── feature_engineering.py
 │   ├── train.py
 │   ├── predict.py
 │   ├── evaluate.py
-│   ├── visualization.py
 │   └── utils.py
 │
 ├── models/
 ├── reports/
-├── app/
-│   └── streamlit_app.py
-│
-├── tests/
+│   └── final_presentation.pptx
 │
 ├── requirements.txt
 ├── README.md
@@ -107,659 +80,296 @@ avito-demand-prediction/
 
 ---
 
-# Team Structure
+# 👥 Team Structure (2 People)
 
-This project is designed for a 3-person team.
-
-| Team Member | Role | Main Focus |
-|---|---|---|
-| Person 1 | Data Engineer / Feature Engineering | EDA, preprocessing, feature engineering |
-| Person 2 | Machine Learning Engineer | Modeling, training, optimization |
-| Person 3 | Analytics / Product / Evaluation | Evaluation, explainability, dashboards, business insights |
+| Team Member | Role            | Focus                                    |
+| ----------- | --------------- | ---------------------------------------- |
+| Person A    | Data & Features | EDA, preprocessing, feature engineering  |
+| Person B    | ML Engineer     | modeling, tuning, ensembling, evaluation |
 
 ---
 
-# Notebook Planning
+# 📌 MILESTONE 1 — Data Understanding + Baseline
 
 ---
 
-# 01_project_setup.ipynb
+## Issue 1.1 — Project Setup & Data Loading
 
-## Purpose
+**Labels:** `setup`, `data`, `day1`
 
-Initial project setup and dataset understanding.
+### Subtasks:
 
-## Contains
-
-- Project objective
-- Dataset description
-- Environment setup
-- Package imports
-- Loading raw datasets
-- Verifying schema
-- Target variable inspection
-- Project roadmap
-
-## Owner
-
-Entire team
+* [ ] Load train/test datasets
+* [ ] Validate shape + schema
+* [ ] Identify target distribution
+* [ ] Check sparsity level (~% zeros per row/column)
+* [ ] Document initial observations
 
 ---
 
-# 02_eda.ipynb
+## Issue 1.2 — Exploratory Data Analysis (EDA)
 
-## Purpose
+**Labels:** `eda`, `analysis`
 
-Exploratory Data Analysis (EDA).
+### Subtasks:
 
-## Contains
-
-### Dataset Exploration
-
-- Shape of train/test sets
-- Data types
-- Duplicate checks
-
-### Missing Values
-
-- Missing value percentages
-- Null visualizations
-
-### Target Analysis
-
-- Target distribution
-- Imbalance inspection
-
-### Numerical Features
-
-- Distributions
-- Outlier detection
-- Correlation heatmaps
-
-### Categorical Features
-
-- Category frequency
-- Regional distributions
-
-### Text Exploration
-
-- Title length
-- Description length
-- Most frequent words
-
-### Initial Business Insights
-
-- Pricing behavior
-- Successful ad categories
-- Posting trends
-
-## Owner
-
-Person 1
+* [ ] Feature sparsity distribution
+* [ ] Row-wise zero counts analysis
+* [ ] Constant / near-constant feature detection
+* [ ] Target distribution (log behavior)
+* [ ] Basic correlation analysis (limited usefulness)
 
 ---
 
-# 03_preprocessing.ipynb
+## Issue 1.3 — Validation Strategy Design
 
-## Purpose
+**Labels:** `validation`, `core`
 
-Create preprocessing workflow.
+### Subtasks:
 
-## Contains
-
-### Missing Value Handling
-
-- Numerical imputation
-- Categorical imputation
-
-### Categorical Encoding
-
-- One-hot encoding
-- Label encoding
-- Target encoding experiments
-
-### Text Cleaning
-
-- Lowercase conversion
-- Punctuation removal
-- Stopword removal
-- Stemming/Lemmatization
-
-### Date Processing
-
-- Extract month
-- Extract weekday
-- Extract posting hour
-
-### TF-IDF Vectorization
-
-- Title TF-IDF
-- Description TF-IDF
-
-### Train/Test Split
-
-## Important
-
-Reusable preprocessing logic should be moved into:
-
-```python
-src/preprocessing.py
-```
-
-## Owner
-
-Person 1
+* [ ] Implement KFold CV (5 folds)
+* [ ] Ensure reproducibility (seed control)
+* [ ] Define MSLE-compatible evaluation pipeline
+* [ ] Compare CV vs leaderboard alignment
 
 ---
 
-# 04_feature_engineering.ipynb
+## Issue 1.4 — Baseline Models
 
-## Purpose
+**Labels:** `baseline`, `modeling`
 
-Develop predictive features.
+### Subtasks:
 
-## Contains
-
-### Price Features
-
-- Log(price)
-- Price bins
-- Normalized prices
-
-### User Features
-
-- Ads per user
-- Average user price
-
-### Text Features
-
-- Title length
-- Description length
-- Punctuation counts
-- Keyword counts
-
-### Time Features
-
-- Posting weekday
-- Weekend indicators
-
-### Statistical Features
-
-- Group aggregations
-- Category averages
-
-## Important
-
-Reusable feature logic should be moved into:
-
-```python
-src/feature_engineering.py
-```
-
-## Owners
-
-Person 1 + Person 2
+* [ ] Ridge Regression baseline (strong benchmark)
+* [ ] LightGBM baseline
+* [ ] Log-transform target experimentation
+* [ ] First CV score tracking system
 
 ---
 
-# 05_baseline_models.ipynb
+## Issue 1.5 — First Submission
 
-## Purpose
+**Labels:** `submission`
 
-Train baseline machine learning models.
+### Subtasks:
 
-## Contains
-
-### Models
-
-- Logistic Regression
-- Decision Tree
-- Random Forest
-
-### Evaluation
-
-- Accuracy
-- Precision
-- Recall
-- F1 Score
-- ROC-AUC
-
-### Cross Validation
-
-## Important
-
-Training logic should be moved into:
-
-```python
-src/train.py
-```
-
-## Owner
-
-Person 2
+* [ ] Generate baseline predictions
+* [ ] Format submission.csv
+* [ ] Submit to Kaggle
+* [ ] Log score in README
 
 ---
 
-# 06_advanced_models.ipynb
-
-## Purpose
-
-Train advanced boosting models.
-
-## Contains
-
-### Models
-
-- XGBoost
-- LightGBM
-- CatBoost
-
-### Hyperparameter Tuning
-
-- GridSearchCV
-- RandomizedSearchCV
-- Optuna
-
-### Additional Tasks
-
-- Feature selection
-- Ensemble experiments
-- Model comparison
-
-## Owner
-
-Person 2
+# 📌 MILESTONE 2 — Feature Engineering + Strong Baseline
 
 ---
 
-# 07_model_evaluation.ipynb
+## Issue 2.1 — Row-wise Statistical Features
 
-## Purpose
+**Labels:** `feature-engineering`
 
-Evaluate machine learning and business performance.
+### Subtasks:
 
-## Contains
-
-### Evaluation Metrics
-
-- Confusion Matrix
-- ROC Curves
-- Precision-Recall Curves
-- Threshold optimization
-
-### Error Analysis
-
-- False positives
-- False negatives
-
-### Business Interpretation
-
-- Operational implications
-- Conversion tradeoffs
-
-## Owner
-
-Person 3
+* [ ] row_mean
+* [ ] row_sum
+* [ ] row_std
+* [ ] row_nonzero_count
+* [ ] row_min / row_max
 
 ---
 
-# 08_explainability.ipynb
+## Issue 2.2 — Feature Filtering
 
-## Purpose
+**Labels:** `data-cleaning`
 
-Interpret model behavior and feature importance.
+### Subtasks:
 
-## Contains
-
-- SHAP Analysis
-- Feature Importance
-- Partial Dependence Plots
-- Local explanations
-
-### Business Recommendations
-
-- What improves ad success
-- Key conversion drivers
-
-## Owner
-
-Person 3
+* [ ] Remove zero-variance features
+* [ ] Remove near-constant features
+* [ ] Reduce noise features
 
 ---
 
-# 09_business_insights.ipynb
+## Issue 2.3 — Feature Engineering Pipeline
 
-## Purpose
+**Labels:** `pipeline`
 
-Convert technical findings into business recommendations.
+### Subtasks:
 
-## Contains
-
-### Seller Insights
-
-- Optimal pricing ranges
-- Successful posting behavior
-
-### Category Insights
-
-- Best-performing categories
-- Weak-performing segments
-
-### Regional Analysis
-
-### Marketplace Recommendations
-
-- Ranking suggestions
-- Seller optimization ideas
-
-### KPI Recommendations
-
-## Owner
-
-Person 3
+* [ ] Modularize into `src/feature_engineering.py`
+* [ ] Ensure train/test consistency
+* [ ] Prevent leakage
 
 ---
 
-# 10_final_pipeline_demo.ipynb
+## Issue 2.4 — Improved Models
 
-## Purpose
+**Labels:** `modeling`
 
-Final end-to-end project demonstration.
+### Subtasks:
 
-## Contains
-
-- Load raw data
-- Apply preprocessing
-- Apply feature engineering
-- Train final model
-- Generate predictions
-- Display metrics
-- Visualize insights
-- Demo example predictions
-
-## Owners
-
-Entire team
+* [ ] Train tuned LightGBM
+* [ ] Train XGBoost model
+* [ ] Compare CV improvements vs baseline
 
 ---
 
-# Python Module Responsibilities
+## Issue 2.5 — First Ensemble
 
-## src/preprocessing.py
+**Labels:** `ensemble`
 
-Contains:
+### Subtasks:
 
-- Text cleaning
-- Missing value handling
-- Categorical encoding
-- Preprocessing pipelines
-
----
-
-## src/feature_engineering.py
-
-Contains:
-
-- Engineered feature functions
-- Aggregation features
-- Derived metrics
+* [ ] Average Ridge + LGBM
+* [ ] Evaluate CV gain
+* [ ] Create submission_v1.csv
 
 ---
 
-## src/train.py
-
-Contains:
-
-- Model training functions
-- Hyperparameter tuning functions
+# 📌 MILESTONE 3 — Optimization + Ensemble
 
 ---
 
-## src/predict.py
+## Issue 3.1 — Hyperparameter Tuning
 
-Contains:
+**Labels:** `tuning`
 
-- Prediction functions
-- Inference pipeline
+### Subtasks:
 
----
-
-## src/evaluate.py
-
-Contains:
-
-- Evaluation metrics
-- Confusion matrix functions
-- ROC plotting
+* [ ] Tune LightGBM depth/leaves
+* [ ] Tune learning rate
+* [ ] Feature fraction tuning
+* [ ] Early stopping experiments
 
 ---
 
-## src/visualization.py
+## Issue 3.2 — Multi-Seed Robustness
 
-Contains:
+**Labels:** `robustness`
 
-- Reusable charts
-- Plotting utilities
+### Subtasks:
 
----
-
-# Collaboration Workflow
-
----
-
-# Branching Strategy
-
-Never work directly on `main`.
-
-Each team member creates feature branches:
-
-```bash
-git checkout -b feature/preprocessing
-git checkout -b feature/modeling
-git checkout -b feature/evaluation
-```
+* [ ] Train models with multiple seeds
+* [ ] Measure variance across runs
+* [ ] Select stable configuration
 
 ---
 
-# Pull Request Workflow
+## Issue 3.3 — Feature Refinement Loop
 
-1. Create branch
-2. Make changes
-3. Commit changes
-4. Push branch
-5. Open Pull Request
-6. Review changes
-7. Merge into main
+**Labels:** `iteration`
 
----
+### Subtasks:
 
-# Notebook Collaboration Rules
-
-## Rules
-
-### Keep notebooks short
-
-Notebooks should:
-
-- Visualize
-- Experiment
-- Explain
-
-Not contain:
-
-- Huge reusable code blocks
+* [ ] Remove low-impact engineered features
+* [ ] Re-run CV comparison
+* [ ] Keep only stable improvements
 
 ---
 
-### Reusable logic belongs in `/src`
+## Issue 3.4 — Final Ensemble Model
 
-Example:
+**Labels:** `final-model`
 
-```python
-from src.preprocessing import preprocess_data
-from src.train import train_xgboost
-```
+### Subtasks:
 
----
+* [ ] Combine:
 
-### Clear notebook outputs before commit
-
-Install:
-
-```bash
-pip install nbstripout
-```
-
-Then:
-
-```bash
-nbstripout --install
-```
-
-This reduces notebook merge conflicts.
+  * Ridge
+  * LightGBM
+  * XGBoost
+* [ ] Weight optimization (grid search or CV-based)
+* [ ] Generate final submission_v2.csv
 
 ---
 
-# Recommended Kanban Board
-
-## BACKLOG
-
-- Understand dataset
-- Define KPIs
-- Research Avito business model
+# 📌 MILESTONE 4 — Finalization + Presentation
 
 ---
 
-## TODO
+## Issue 4.1 — Code Refactoring
 
-### Data Tasks
+**Labels:** `refactor`
 
-- Handle missing values
-- TF-IDF preprocessing
-- Feature engineering
+### Subtasks:
 
-### Modeling Tasks
-
-- Logistic regression baseline
-- Random forest benchmark
-- XGBoost model
-- Hyperparameter tuning
-
-### Evaluation Tasks
-
-- ROC analysis
-- SHAP explainability
-- Threshold optimization
-
-### Product Tasks
-
-- Streamlit dashboard
-- README documentation
-- Final presentation
+* [ ] Move logic into `/src`
+* [ ] Clean notebooks
+* [ ] Remove redundant experiments
+* [ ] Ensure reproducibility
 
 ---
 
-## IN PROGRESS
+## Issue 4.2 — Documentation (README)
 
-Currently assigned active work.
+**Labels:** `docs`
 
----
+### Subtasks:
 
-## REVIEW
-
-Code review and pull request review.
-
----
-
-## DONE
-
-Completed and merged tasks.
+* [ ] Problem definition
+* [ ] Dataset description
+* [ ] Approach summary
+* [ ] Model pipeline explanation
+* [ ] Results table (CV + Kaggle)
 
 ---
 
-# Smart Task Splitting Strategy
+## Issue 4.3 — Visualization Assets
+
+**Labels:** `visualization`
+
+### Subtasks:
+
+* [ ] Feature importance plots
+* [ ] CV performance comparison
+* [ ] Error distribution plots
+* [ ] Model comparison chart
 
 ---
 
-# Person 1 — Data Engineering
+## Issue 4.4 — Presentation Deck
 
-## Primary Focus
+**Labels:** `presentation`
 
-Create clean and reusable datasets.
+### Subtasks:
 
-## Tasks
-
-- EDA
-- Preprocessing
-- TF-IDF
-- Feature engineering
-- Processed dataset exports
-
-## Deliverables
-
-- preprocessing.py
-- feature_engineering.py
-- processed datasets
+* [ ] Business framing of problem
+* [ ] Data challenges (sparsity, anonymity)
+* [ ] Approach evolution (baseline → ensemble)
+* [ ] Results + improvements
+* [ ] Key learnings
 
 ---
 
-# Person 2 — Machine Learning
+## Issue 4.5 — Final Submission + Reproducibility Check
 
-## Primary Focus
+**Labels:** `final`
 
-Build and optimize models.
+### Subtasks:
 
-## Tasks
-
-- Logistic regression
-- Random forest
-- XGBoost
-- LightGBM
-- Hyperparameter tuning
-- Model comparison
-
-## Deliverables
-
-- train.py
-- trained models
-- evaluation benchmarks
+* [ ] Full pipeline rerun
+* [ ] Verify reproducibility
+* [ ] Final Kaggle submission
+* [ ] Lock final results
 
 ---
 
-# Person 3 — Analytics / Product
+# 📋 Suggested GitHub Board Columns
 
-## Primary Focus
-
-Business interpretation and deployment.
-
-## Tasks
-
-- Evaluation notebooks
-- Explainability
-- Business recommendations
-- Streamlit dashboard
-- GitHub organization
-- README
-- Final presentation
-
-## Deliverables
-
-- Evaluation reports
-- SHAP insights
-- Streamlit app
-- Final documentation
+* 📌 Backlog
+* 🚧 In Progress
+* 👀 Review
+* ✅ Done
 
 ---
 
-# Final Project Goal
+# ⚙️ Key Structural Differences vs Avito Project
 
-The final deliverable should demonstrate:
+* ❌ No text/NLP pipeline (not needed here)
+* ❌ No business KPIs or classification metrics
+* ✔ Focus on:
 
-- End-to-end ML workflow
-- Collaborative software engineering
-- Business analytics
-- Explainable AI
-- Deployment-ready structure
-- Professional GitHub practices
-
-The objective is not only model accuracy, but building a realistic machine learning analytics system.
+  * sparsity engineering
+  * statistical features
+  * ensemble regression
+  * log-error optimization
