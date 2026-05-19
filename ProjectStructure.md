@@ -80,149 +80,177 @@ santander-value-prediction/
 
 ---
 
-# 👥 Team Structure (2 People)
+# 👥 Balanced Team Structure (Equal Parallel Work)
 
-| Team Member | Role            | Focus                                    |
-| ----------- | --------------- | ---------------------------------------- |
-| Person A    | Data & Features | EDA, preprocessing, feature engineering  |
-| Person B    | ML Engineer     | modeling, tuning, ensembling, evaluation |
+| Person | Role Focus                                    | Core Strength                           |
+| ------ | --------------------------------------------- | --------------------------------------- |
+| **A**  | Data + Feature Engineering                    | Signal creation                         |
+| **B**  | Modeling + Optimization                       | Performance gain                        |
+| **C**  | Evaluation + Experimentation + Light Modeling | Validation + insight + support modeling |
+
+### Key change vs before:
+
+👉 Everyone now does **EDA + modeling + evaluation loops**, just at different emphasis levels.
 
 ---
 
-# 📌 MILESTONE 1 — Data Understanding + Baseline
+# 🧭 PRINCIPLE OF THIS STRUCTURE
+
+Each milestone contains:
+
+* 3 parallel workstreams (A / B / C)
+* shared dependency outputs
+* frequent integration points
+
+No one “waits” for another person.
 
 ---
 
-## Issue 1.1 — Project Setup & Data Loading
+# 📌 MILESTONE 1 — Understanding + Baseline (Parallel Setup)
 
-**Labels:** `setup`, `data`, `day1`
+---
+
+## 🟦 Issue 1.1 — Data Understanding + Quality Scan
+
+**Owner: A + C (parallel)**
+**Labels:** `eda`
+
+### A does:
+
+* [ ] Load dataset + memory analysis
+* [ ] Sparsity per feature + row
+* [ ] Constant feature detection
+
+### C does:
+
+* [ ] Target distribution analysis
+* [ ] Outlier behavior check
+* [ ] CV risk analysis (leakage intuition)
+
+---
+
+## 🟦 Issue 1.2 — Feature + Signal Exploration
+
+**Owner: A + B (parallel)**
+**Labels:** `feature-exploration`
+
+### A does:
+
+* [ ] Row statistics (mean, sum, std, non-zero)
+* [ ] Feature variance ranking
+
+### B does:
+
+* [ ] Quick baseline LightGBM on raw data
+* [ ] Log-transform target experiments
+
+---
+
+## 🟦 Issue 1.3 — CV Framework (Critical Shared Backbone)
+
+**Owner: B + C**
+
+### B does:
+
+* [ ] KFold CV implementation
+* [ ] MSLE-aligned evaluation
+
+### C does:
+
+* [ ] CV stability checks
+* [ ] Fold variance analysis
+
+---
+
+## 🟦 Issue 1.4 — First Baseline Models
+
+**Owner: A + B + C (split models)**
+
+* A → Ridge baseline
+* B → LightGBM baseline
+* C → Simple averaged model + sanity check
 
 ### Subtasks:
 
-* [ ] Load train/test datasets
-* [ ] Validate shape + schema
-* [ ] Identify target distribution
-* [ ] Check sparsity level (~% zeros per row/column)
-* [ ] Document initial observations
+* [ ] Train model
+* [ ] Evaluate CV
+* [ ] Log results in shared table
 
 ---
 
-## Issue 1.2 — Exploratory Data Analysis (EDA)
+## 🟦 Issue 1.5 — First Submission
 
-**Labels:** `eda`, `analysis`
+**Owner: C**
 
-### Subtasks:
-
-* [ ] Feature sparsity distribution
-* [ ] Row-wise zero counts analysis
-* [ ] Constant / near-constant feature detection
-* [ ] Target distribution (log behavior)
-* [ ] Basic correlation analysis (limited usefulness)
+* [ ] Merge best baseline predictions
+* [ ] Kaggle submission
+* [ ] Score tracking dashboard
 
 ---
 
-## Issue 1.3 — Validation Strategy Design
-
-**Labels:** `validation`, `core`
-
-### Subtasks:
-
-* [ ] Implement KFold CV (5 folds)
-* [ ] Ensure reproducibility (seed control)
-* [ ] Define MSLE-compatible evaluation pipeline
-* [ ] Compare CV vs leaderboard alignment
+# 📌 MILESTONE 2 — Feature Engineering + Model Lift
 
 ---
 
-## Issue 1.4 — Baseline Models
+## 🟩 Issue 2.1 — Feature Engineering (Parallel Build)
 
-**Labels:** `baseline`, `modeling`
+**Owner: A + C**
 
-### Subtasks:
+### A (core features):
 
-* [ ] Ridge Regression baseline (strong benchmark)
-* [ ] LightGBM baseline
-* [ ] Log-transform target experimentation
-* [ ] First CV score tracking system
+* [ ] row_mean / sum / std
+* [ ] non-zero counts
+* [ ] feature filtering
 
----
+### C (experimental features):
 
-## Issue 1.5 — First Submission
-
-**Labels:** `submission`
-
-### Subtasks:
-
-* [ ] Generate baseline predictions
-* [ ] Format submission.csv
-* [ ] Submit to Kaggle
-* [ ] Log score in README
+* [ ] PCA components (optional)
+* [ ] feature clustering / grouping
+* [ ] interaction features (lightweight)
 
 ---
 
-# 📌 MILESTONE 2 — Feature Engineering + Strong Baseline
+## 🟩 Issue 2.2 — Feature Validation Loop
+
+**Owner: B + C**
+
+* [ ] Compare feature sets via CV
+* [ ] Remove unstable features
+* [ ] Track feature impact
 
 ---
 
-## Issue 2.1 — Row-wise Statistical Features
+## 🟩 Issue 2.3 — Model Expansion
 
-**Labels:** `feature-engineering`
+**Owner: A + B**
 
-### Subtasks:
+### A:
 
-* [ ] row_mean
-* [ ] row_sum
-* [ ] row_std
-* [ ] row_nonzero_count
-* [ ] row_min / row_max
+* Ridge + ElasticNet tuning
 
----
+### B:
 
-## Issue 2.2 — Feature Filtering
-
-**Labels:** `data-cleaning`
-
-### Subtasks:
-
-* [ ] Remove zero-variance features
-* [ ] Remove near-constant features
-* [ ] Reduce noise features
+* LightGBM tuning
+* XGBoost baseline
 
 ---
 
-## Issue 2.3 — Feature Engineering Pipeline
+## 🟩 Issue 2.4 — First Ensemble System
 
-**Labels:** `pipeline`
+**Owner: B + C**
 
-### Subtasks:
-
-* [ ] Modularize into `src/feature_engineering.py`
-* [ ] Ensure train/test consistency
-* [ ] Prevent leakage
+* [ ] Weighted blending experiments
+* [ ] CV-based weight tuning
+* [ ] submission_v1
 
 ---
 
-## Issue 2.4 — Improved Models
+## 🟩 Issue 2.5 — Feature Pipeline Modularization
 
-**Labels:** `modeling`
+**Owner: A**
 
-### Subtasks:
-
-* [ ] Train tuned LightGBM
-* [ ] Train XGBoost model
-* [ ] Compare CV improvements vs baseline
-
----
-
-## Issue 2.5 — First Ensemble
-
-**Labels:** `ensemble`
-
-### Subtasks:
-
-* [ ] Average Ridge + LGBM
-* [ ] Evaluate CV gain
-* [ ] Create submission_v1.csv
+* [ ] Move logic into `feature_engineering.py`
+* [ ] Ensure reproducibility
 
 ---
 
@@ -230,56 +258,53 @@ santander-value-prediction/
 
 ---
 
-## Issue 3.1 — Hyperparameter Tuning
+## 🟨 Issue 3.1 — Hyperparameter Optimization (Parallel)
 
-**Labels:** `tuning`
+**Owner: A + B + C**
 
-### Subtasks:
-
-* [ ] Tune LightGBM depth/leaves
-* [ ] Tune learning rate
-* [ ] Feature fraction tuning
-* [ ] Early stopping experiments
+* A → Ridge/ElasticNet tuning
+* B → LightGBM tuning
+* C → XGBoost + sanity tuning
 
 ---
 
-## Issue 3.2 — Multi-Seed Robustness
+## 🟨 Issue 3.2 — Multi-Seed Stability
 
-**Labels:** `robustness`
+**Owner: B + C**
 
-### Subtasks:
-
-* [ ] Train models with multiple seeds
-* [ ] Measure variance across runs
-* [ ] Select stable configuration
+* [ ] run multiple seeds per model
+* [ ] measure variance
+* [ ] pick stable configs
 
 ---
 
-## Issue 3.3 — Feature Refinement Loop
+## 🟨 Issue 3.3 — Feature Refinement Loop
 
-**Labels:** `iteration`
+**Owner: A + C**
 
-### Subtasks:
-
-* [ ] Remove low-impact engineered features
-* [ ] Re-run CV comparison
-* [ ] Keep only stable improvements
+* [ ] prune weak features
+* [ ] retrain models
+* [ ] measure uplift
 
 ---
 
-## Issue 3.4 — Final Ensemble Model
+## 🟨 Issue 3.4 — Final Ensemble v2
 
-**Labels:** `final-model`
+**Owner: B + C**
 
-### Subtasks:
+* [ ] Ridge + LGBM + XGB
+* [ ] weighted optimization
+* [ ] submission_v2
 
-* [ ] Combine:
+---
 
-  * Ridge
-  * LightGBM
-  * XGBoost
-* [ ] Weight optimization (grid search or CV-based)
-* [ ] Generate final submission_v2.csv
+## 🟨 Issue 3.5 — Model Diagnostics
+
+**Owner: C**
+
+* [ ] error distribution
+* [ ] CV vs LB gap analysis
+* [ ] overfitting detection
 
 ---
 
@@ -287,89 +312,102 @@ santander-value-prediction/
 
 ---
 
-## Issue 4.1 — Code Refactoring
+## 🟥 Issue 4.1 — Repo Refactor (All)
 
-**Labels:** `refactor`
+**Owner: A + B + C**
 
-### Subtasks:
-
-* [ ] Move logic into `/src`
-* [ ] Clean notebooks
-* [ ] Remove redundant experiments
-* [ ] Ensure reproducibility
+* [ ] clean notebooks
+* [ ] move code to `/src`
+* [ ] remove experiments
+* [ ] ensure reproducibility
 
 ---
 
-## Issue 4.2 — Documentation (README)
+## 🟥 Issue 4.2 — Final Model Selection
 
-**Labels:** `docs`
+**Owner: B + C**
 
-### Subtasks:
-
-* [ ] Problem definition
-* [ ] Dataset description
-* [ ] Approach summary
-* [ ] Model pipeline explanation
-* [ ] Results table (CV + Kaggle)
+* [ ] choose best ensemble
+* [ ] rerun pipeline
+* [ ] lock final model
 
 ---
 
-## Issue 4.3 — Visualization Assets
+## 🟥 Issue 4.3 — Insights & Visualization
 
-**Labels:** `visualization`
+**Owner: C + A**
 
-### Subtasks:
+### C:
 
-* [ ] Feature importance plots
-* [ ] CV performance comparison
-* [ ] Error distribution plots
-* [ ] Model comparison chart
+* SHAP / feature importance
+* error analysis plots
 
----
+### A:
 
-## Issue 4.4 — Presentation Deck
-
-**Labels:** `presentation`
-
-### Subtasks:
-
-* [ ] Business framing of problem
-* [ ] Data challenges (sparsity, anonymity)
-* [ ] Approach evolution (baseline → ensemble)
-* [ ] Results + improvements
-* [ ] Key learnings
+* feature distribution visuals
+* sparsity insights
 
 ---
 
-## Issue 4.5 — Final Submission + Reproducibility Check
+## 🟥 Issue 4.4 — Presentation Deck
 
-**Labels:** `final`
+**Owner: C (lead), A+B support**
 
-### Subtasks:
-
-* [ ] Full pipeline rerun
-* [ ] Verify reproducibility
-* [ ] Final Kaggle submission
-* [ ] Lock final results
+* [ ] story arc
+* [ ] problem → method → result
+* [ ] visuals integration
+* [ ] final narrative
 
 ---
 
-# 📋 Suggested GitHub Board Columns
+## 🟥 Issue 4.5 — Final Submission + Reproducibility
 
-* 📌 Backlog
-* 🚧 In Progress
-* 👀 Review
-* ✅ Done
+**Owner: B**
+
+* [ ] full pipeline rerun
+* [ ] final Kaggle submission
+* [ ] results locked in README
 
 ---
 
-# ⚙️ Key Structural Differences vs Avito Project
+# ⚖️ Why this is now balanced
 
-* ❌ No text/NLP pipeline (not needed here)
-* ❌ No business KPIs or classification metrics
-* ✔ Focus on:
+### Before:
 
-  * sparsity engineering
-  * statistical features
-  * ensemble regression
-  * log-error optimization
+* A = data heavy
+* B = modeling heavy
+* C = “downstream only”
+
+### Now:
+
+Each person touches:
+
+* data
+* modeling
+* evaluation
+* interpretation
+
+### But still specialized:
+
+* A → strongest in feature signal
+* B → strongest in optimization
+* C → strongest in validation + story
+
+---
+
+# 🚀 What this enables (important)
+
+* No idle time across 4 days
+* Continuous parallel experimentation
+* Fast ensemble iteration
+* Built-in cross-validation thinking
+* Strong final presentation quality
+
+---
+
+If you want next step, I can:
+
+* convert this into a **GitHub importable issue file**
+* or generate a **live Kanban board layout (Notion / Trello style)**
+* or design a **daily standup template so you execute this perfectly in 4 days**
+
