@@ -1,12 +1,32 @@
-altair==5.0.1
-jupyterlab==3.6.3
-ipywidgets==8.0.6
-matplotlib==3.7.1
-seaborn==0.12.2
+# Core data stack
 numpy==1.24.3
 pandas==2.0.1
-jupyterlab-dash==0.1.0a3
+
+# Visualization
+matplotlib==3.7.1
+seaborn==0.12.2
+altair==5.0.1
+
+# ML core
 scikit-learn==1.2.2
+lightgbm==4.3.0
+scipy==1.10.1
+
+# Model interpretation (important for your sparse feature space)
+shap==0.44.1
+
+# Statistical tools (optional but useful for EDA)
 statsmodels==0.13.5
+
+# Jupyter environment
+jupyterlab==3.6.3
+ipywidgets==8.0.6
+jupyterlab-dash==0.1.0a3
+
+# Dev / testing / reproducibility
 pytest==7.3.1
 nbdime==4.0.2
+
+# Performance / optional but recommended for sparse datasets
+joblib==1.3.2
+tqdm==4.66.1
