@@ -10,10 +10,11 @@ altair==5.0.1
 # ML core
 scikit-learn==1.2.2
 lightgbm==4.3.0
-scipy==1.10.1
+xgboost==2.0.3
+scipy==1.11.4
 
 # Model interpretation (important for your sparse feature space)
-shap==0.44.1
+shap==0.45.1
 
 # Statistical tools (optional but useful for EDA)
 statsmodels==0.13.5
