@@ -186,3 +186,11 @@ git add your_notebook.ipynb
 git commit -m "Resolved notebook conflict"
 ```
 That’s it — clean merges for notebooks!
+
+## Presentation
+```bash
+pip install RISE
+
+jupyter nbconvert santander_customervalue_prediction.ipynb --to slides --no-input --post serve
+
+```
